@@ -1,0 +1,97 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+</head>
+<style type="text/css">
+  body {
+    background: #ccdcdc;
+    user-select: none;
+  }
+
+  .NextTask {
+    margin-top: 10px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  color: black;
+  background-color: white;
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+}
+
+.NextTask:hover {
+  -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+  border-width: 2px;
+  border-color: #7dacaf;
+}
+</style>
+<body>
+  <div id="app"
+       class="ui container">
+    <h1>Профили на GitHub - Задание карточек 2</h1>
+    <div class="ui four cards">
+      <github-user-card v-for="username in usernames" :username="username" :key="username"></github-user-card>
+    </div>
+    <button class="NextTask">Перейти к следующему заданию</button>
+  </div>
+  <script type="text/x-template" id="github-user-card-template">
+    <div class="ui card">
+      <div class="image">
+        <img :src="user.avatar_url">
+      </div>
+      <div class="content">
+        <a :href="`https://github.com/${username}`" class="header">{{user.name}}</a>
+        <div class="meta">
+          <span class="date">Присоединился в {{ new Date(user.created_at).getFullYear() }}</span>
+        </div>
+        <div class="description">
+          {{user.bio}}
+        </div>
+      </div>
+      <div class="extra content">
+        <a :href="`https://github.com/${username}?tab=followers`">
+          <i class="user icon"></i>
+          {{user.followers}} Подписчиков
+        </a>
+      </div>
+    </div>
+  </script>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          usernames: ['danielkellyio', 'hootlex', 'rahaug', 'akryum']
+        }
+      }
+    })
+    .component('github-user-card', {
+      template: '#github-user-card-template',
+      props: {
+        username: { type: String, required: true }
+      },
+      data() {
+        return {
+          user: {}
+        }
+      },
+      async created() {
+        const response = await axios.get(`https://api.github.com/users/${this.username}`)
+        this.user = response.data
+      }
+    })
+    .mount('#app')
+  </script>
+          <script>
+        document.querySelector('.NextTask').addEventListener('click', function() {
+            window.location.href = '5.html';
+        });
+    </script>
+</body>
+
+</html>

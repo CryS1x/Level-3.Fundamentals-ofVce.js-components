@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Задание 3 покупка бананов</title>
+</head>
+<style type="text/css">
+    body {
+    background: #ccdcdc;
+    user-select: none;
+  }
+  .NextTask {
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  margin-top: 30px;
+  color: black;
+  background-color: white;
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+}
+
+.NextTask:hover {
+  -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+  border-width: 2px;
+  border-color: #7dacaf;
+}
+</style>
+<body>
+  <div id="app">
+    <h1>Задание 3 покупка бананов</h1>
+    <todo-item>
+      Купить бананы
+      <template #description>
+        <p>Бананы полезны для здоровья</p>
+      </template>
+      <template #button-text>
+        Сделайте это красиво
+      </template>
+    </todo-item>
+    <todo-item>Ешьте бананы</todo-item>
+    <todo-item>Празднуйте!</todo-item>
+    <button class="NextTask">Перейти к следующему заданию</button>
+  </div>
+
+  <script type="text/x-template" id="todo-item-template">
+    <div>
+      <input type="checkbox" v-model="done">
+      <span :class="{ done }">
+        <slot></slot>
+      </span>
+      <slot name="description"></slot>
+      <button><slot name="button-text">Выделить</slot></button>
+    </div>
+  </script>
+  <style>
+    .done{
+      color:green;
+      text-decoration: line-through;
+    }
+  </style>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="script/4.js"></script>
+        <script>
+        document.querySelector('.NextTask').addEventListener('click', function() {
+            window.location.href = '4 (1).html';
+        });
+    </script>
+</body>
+
+</html>
